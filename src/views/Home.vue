@@ -13,14 +13,22 @@
 
 <script>
 import TvShow from "@/components/TvShow.vue";
+import TvShowService from "@/services/tvshow.service";
 export default {
   components: {
     TvShow
   },
   data() {
     return {
-      title: "Home"
+      title: "Home",
+      TvShows: []
     };
+  },
+  created() {
+    TvShowService.getTvShow("bad").then(TvShows => {
+      this.TvShows = TvShows;
+      console.log(TvShows);
+    });
   }
 };
 </script>
