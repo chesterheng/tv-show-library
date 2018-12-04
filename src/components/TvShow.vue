@@ -5,7 +5,9 @@
       <h3>{{ tvShowData.name }}</h3>
       <div v-html="tvShowData.summary"></div>
     </div>
-    <i class="fa fa-star"></i>
+    <button type-="button" @click="onFavoriteClick">
+      <i class="fa fa-star"></i>
+    </button>
   </div>
 </template>
 
@@ -13,6 +15,11 @@
 export default {
   props: {
     tvShowData: Object
+  },
+  methods: {
+    onFavoriteClick(event) {
+      this.$emit("favorites-selected", event, this.tvShowData);
+    }
   }
 };
 </script>
@@ -34,5 +41,11 @@ export default {
 }
 .fa-star--selected {
   color: gold;
+}
+.tv-show button {
+  background: none;
+  height: 20px;
+  border-color: teal;
+  cursor: pointer;
 }
 </style>

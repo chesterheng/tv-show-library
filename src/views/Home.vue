@@ -7,13 +7,19 @@
         <button>Search</button>
       </div>
     </div>
-    <TvShow v-for="tvShow in tvShows" :tvShowData="tvShow" :key="tvShow.id"/>
+    <TvShow
+      v-for="tvShow in tvShows"
+      :tvShowData="tvShow"
+      :key="tvShow.id"
+      @favorites-selected="updateFavorites($event, tvShow)"
+    />
   </div>
 </template>
 
 <script>
 import TvShow from "@/components/TvShow.vue";
 import TvShowService from "@/services/tvshow.service";
+import FavoritesService from "@/services/favorites.service";
 export default {
   components: {
     TvShow
@@ -29,6 +35,15 @@ export default {
       this.tvShows = tvShows;
       console.log(this.tvShows);
     });
+  },
+  methods: {
+    updateFavorites(event, tvShow) {
+      if (FavoritesService.isFavorite(tvShow)) {
+        FavoritesService.removeFavorite(tvShow);
+      } else {
+        FavoritesService.addFavorite(tvShow);
+      }
+    }
   }
 };
 </script>
