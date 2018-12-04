@@ -7,7 +7,7 @@
         <button>Search</button>
       </div>
     </div>
-    <TvShow/>
+    <TvShow v-for="tvShow in tvShows" :tvShowData="tvShow" :key="tvShow.id"/>
   </div>
 </template>
 
@@ -21,13 +21,13 @@ export default {
   data() {
     return {
       title: "Home",
-      TvShows: []
+      tvShows: []
     };
   },
   created() {
-    TvShowService.getTvShow("bad").then(TvShows => {
-      this.TvShows = TvShows;
-      console.log(TvShows);
+    TvShowService.getTvShow("happy").then(tvShows => {
+      this.tvShows = tvShows;
+      console.log(this.tvShows);
     });
   }
 };
