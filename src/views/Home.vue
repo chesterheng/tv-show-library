@@ -3,8 +3,8 @@
     <div class="home-header">
       <h1>{{ title }}</h1>
       <div class="search">
-        <input type="text" placeholder="search...">
-        <button>Search</button>
+        <input type="text" placeholder="search..." v-model="searchData">
+        <button @click="loadTvShows">Search</button>
       </div>
     </div>
     <TvShow
@@ -27,7 +27,8 @@ export default {
   data() {
     return {
       title: "Home",
-      tvShows: []
+      tvShows: [],
+      searchData: ""
     };
   },
   created() {
@@ -43,6 +44,12 @@ export default {
       } else {
         FavoritesService.addFavorite(tvShow);
       }
+    },
+    loadTvShows() {
+      TvShowService.getTvShow(this.searchData).then(tvShows => {
+        this.tvShows = tvShows;
+        console.log(this.tvShows);
+      });
     }
   }
 };
