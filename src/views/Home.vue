@@ -1,17 +1,28 @@
 <template>
   <div>
     <div class="home-header">
-      <h1>Home</h1>
+      <h1>{{ title }}</h1>
       <div class="search">
         <input type="text" placeholder="search...">
         <button>Search</button>
       </div>
     </div>
+    <TvShow/>
   </div>
 </template>
 
 <script>
-export default {};
+import TvShow from "@/components/TvShow.vue";
+export default {
+  components: {
+    TvShow
+  },
+  data() {
+    return {
+      title: "Home"
+    };
+  }
+};
 </script>
 
 <style scoped>
